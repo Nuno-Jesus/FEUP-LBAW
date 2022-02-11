@@ -1,0 +1,1357 @@
+openapi: 3.0.0
+
+info:
+ version: '0.1'
+ title: 'LBAW GrabNBuild Web API'
+ description: 'Web Resources Specification (A7) for GrabNBuild'
+
+servers:
+- url: http://lbaw.fe.up.pt
+  description: Production server
+
+externalDocs:
+  description: Find more info here.
+  url: https://web.fe.up.pt/~ssn/wiki/teach/lbaw/medialib/a07
+
+tags:
+ - name: 'M01: Authentication and Individual Profile'
+ - name: 'M02: Products'
+ - name: 'M03: Reviews and Wish list'
+ - name: 'M04: Orders'
+ - name: 'M05: User Administration and Information Pages'
+
+
+paths:
+ /login:
+   get:
+     operationId: R101
+     summary: 'R101: Login Form'
+     description: 'Provide login form. Access: PUB'
+     tags:
+       - 'M01: Authentication and Individual Profile'
+     responses:
+       '200':
+         description: 'Ok. Show Log-in UI'
+   post:
+     operationId: R102
+     summary: 'R102: Login Action'
+     description: 'Processes the login form submission. Access: PUB'
+     tags:
+       - 'M01: Authentication and Individual Profile'
+
+     requestBody:
+       required: true
+       content:
+         application/x-www-form-urlencoded:
+           schema:
+             type: object
+             properties:
+               email:          # <!--- form field name
+                 type: string
+               password:    # <!--- form field name
+                 type: string
+             required:
+                  - email
+                  - password
+
+     responses:
+       '302':
+         description: 'Redirect after processing the login credentials.'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'Successful authentication. Redirect to home page.'
+                 value: '/'
+               302Error:
+                 description: 'Failed authentication. Redirect to login form.'
+                 value: '/login'
+
+ /logout:
+   get:
+     operationId: R103
+     summary: 'R103: Logout Action'
+     description: 'Logout the current authenticated user. Access: USR, ADM'
+     tags:
+       - 'M01: Authentication and Individual Profile'
+     responses:
+       '302':
+         description: 'Redirect after processing logout.'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'Successful logout. Redirect to home page.'
+                 value: '/'
+
+ /register:
+   get:
+     operationId: R104
+     summary: 'R104: Register Form'
+     description: 'Provide new user registration form. Access: PUB, ADM'
+     tags:
+       - 'M01: Authentication and Individual Profile'
+     responses:
+       '200':
+         description: 'Ok. Show Sign-Up UI'
+
+   post:
+     operationId: R105
+     summary: 'R105: Register Action'
+     description: 'Processes the new user registration form submission. Access: PUB, ADM'
+     tags:
+       - 'M01: Authentication and Individual Profile'
+
+     requestBody:
+       required: true
+       content:
+         application/x-www-form-urlencoded:
+           schema:
+             type: object
+             properties:
+               username:
+                 type: string
+               email:
+                 type: string
+               password:
+                 type: string
+               phone:
+                 type: string
+             required:
+                - username
+                - email
+                - password
+
+     responses:
+       '302':
+         description: 'Redirect after processing the new user information.'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'Successful authentication. Redirect to home page.'
+                 value: '/'
+               302Failure:
+                 description: 'Failed authentication. Redirect to register form.'
+                 value: '/register'
+
+ /users:
+   get:
+     operationId: R106
+     summary: 'R106: View user profile'
+     description: 'Show the individual user profile. Access: USR'
+     tags:
+       - 'M01: Authentication and Individual Profile'
+
+     responses:
+       '200':
+         description: 'Ok. Show User Profile UI'
+
+
+   delete:
+     operationId: R107
+     summary: 'R107: Delete user profile'
+     description: 'Delete user profile. Access: OWN, ADM'
+     tags:
+      - 'M01: Authentication and Individual Profile'
+
+     response:
+        '200':
+          description: 'Ok. Delete User Profile'
+
+ /users/edit/{id}:
+   post:
+     operationId: R108
+     summary: 'R108: Edit Action'
+     description: 'Processes the new user profile info form submission. Access: OWN, ADM'
+     tags:
+       - 'M01: Authentication and Individual Profile'
+
+     requestBody:
+       required: true
+       content:
+         application/x-www-form-urlencoded:
+           schema:
+             type: object
+             properties:
+               username:
+                 type: string
+               password:
+                 type: string
+               email:
+                 type: string
+               phone:
+                 type: string
+
+     responses:
+       '302':
+         description: 'Redirect after processing the new user information.'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'Successful authentication. Redirect to user profile.'
+                 value: '/users'
+               302Failure:
+                 description: 'Failed authentication. Redirect to user profile.'
+                 value: '/users'
+
+ /reset:
+   get:
+     operationId: R109
+     summary: 'R109: Password Reset'
+     description: 'Provide password reset form. Access: OWN'
+     tags:
+       - 'M01: Authentication and Individual Profile'
+     responses:
+       '200':
+         description: 'Ok. Show Reset UI'
+       '403':
+         description: 'Access forbidden'
+   post:
+     operationId: R109
+     summary: 'R102: Reset Action'
+     description: 'Processes the reset form submission. Access: OWN'
+     tags:
+       - 'M01: Authentication and Individual Profile'
+
+     requestBody:
+       required: true
+       content:
+         application/x-www-form-urlencoded:
+           schema:
+             type: object
+             properties:
+               email:          # <!--- form field name
+                 type: string
+             required:
+                  - email
+
+     responses:
+       '302':
+         description: 'Redirect after processing the form.'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'Successful email. Redirect to home page.'
+                 value: '/'
+               302Error:
+                 description: 'Failed email. Redirect to profile.'
+                 value: '/users'
+
+ /recover:
+   get:
+     operationId: R110
+     summary: 'R109: Forgot Password'
+     description: 'Provide form to email to retrieve password. Access: PUB'
+     tags:
+       - 'M01: Authentication and Individual Profile'
+     responses:
+       '200':
+         description: 'Ok. Show Forgot UI'
+   post:
+     operationId: R110
+     summary: 'R102: Forgot Action'
+     description: 'Processes the forgot password form submission. Access: PUB'
+     tags:
+       - 'M01: Authentication and Individual Profile'
+
+     requestBody:
+       required: true
+       content:
+         application/x-www-form-urlencoded:
+           schema:
+             type: object
+             properties:
+               email:          # <!--- form field name
+                 type: string
+             required:
+                  - email
+
+     responses:
+       '302':
+         description: 'Redirect after processing the form.'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'Successful email. Redirect to login page.'
+                 value: '/login'
+               302Error:
+                 description: 'Failed email. Redirect to recover again.'
+                 value: '/recover'
+
+ /user/adresses/new:
+   get:
+     operationId: R111
+     summary: 'R111: Add Adress Form'
+     description: 'Add adress to the current authenticated user. Access: OWN'
+     tags:
+       - 'M01: Authentication and Individual Profile'
+   post:
+      operationId: R111
+      summary: 'R111: Adress Form'
+      description: 'Processes the add adress form submission. Access: OWN'
+      tags:
+        - 'M01: Authentication and Individual Profile'
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                streetName:
+                  type: string
+                streetNumber:
+                  type: integer
+                aptNumber:
+                  type: integer
+                floor:
+                  type: integer
+                zipcodeNumber:
+                  type: string
+                zipcodeLocation:
+                  type: string
+                required:
+                    - email
+                    - zipcodeNumber
+                    - zipcodeLocation
+
+      responses:
+       '200':
+         description: 'Ok. Add adress'
+
+ /users/adresses/{adress_id}:
+     delete:
+       operationId: R112
+       summary: 'R112: Removes Given Adress'
+       description: 'Removes adress given by ID. Access: OWN.'
+
+       tags:
+         - 'M01: Authentication and Individual Profile'
+
+       parameters:
+         - in: query
+           name: id
+           description: Int for id
+           schema:
+             type: number
+           required: true
+
+       responses:
+         '200':
+           description: Success
+
+ /users/adresses:
+     delete:
+       operationId: R113
+       summary: 'R113: Shows User Adresses'
+       description: 'Shown Own User Adresses. Access: OWN.'
+
+       tags:
+         - 'M01: Authentication and Individual Profile'
+
+       responses:
+         '200':
+           description: Success
+
+ /products:
+      get:
+      operationId: R200
+      summary: 'R200: Show all products'
+      description: 'Displays all the products'
+
+      tags:
+        - 'M02: Products'
+
+      responses:
+       '200':
+         description: 'Ok. Show products from this category'
+
+ /products/categories/{category}:
+
+    get:
+      operationId: R201
+      summary: 'R201: Show products from a specific category'
+      description: 'Displays all the products that belong to a specific category'
+
+      tags:
+        - 'M02: Products'
+
+      responses:
+       '200':
+         description: 'Ok. Show products from this category'
+
+ /products/search:
+    get:
+      operationId: R202
+      summary: 'R202: Search Products' #different search functions per type of product? since different specs
+      description: 'Searches for products and returns the results as JSON. Access: PUB.'
+
+      tags:
+        - 'M02: Products'
+
+      parameters:
+        - in: query
+          name: query
+          description: String to use for full-text search
+          schema:
+            type: string
+          required: true
+
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    title:
+                      type: string
+                    #obs:
+                    #  type: string
+                    #year:
+                    #  type: string
+                    #owner:
+                    #  type: string
+                    #type:
+                    #  type: string
+
+ /products/{id}:
+   get:
+     operationId: R203
+     summary: 'R203: Product Info'
+     description: 'Provides info on specified product. Access: PUB'
+     tags:
+       - 'M02: Products'
+     responses:
+       '200':
+         description: 'Ok. Show Prod Info'
+
+
+
+ /addprod:
+   get:
+     operationId: R212
+     summary: 'R212: Add Product Form'
+     description: 'Provide product creation form. Access: ADM'
+     tags:
+        - 'M02: Products'
+     responses:
+       '200':
+         description: 'Ok. Show Form'
+       '403':
+         description: 'Access forbidden'
+   post:
+      operationId: R212
+      summary: 'R212: Add Generic Product'
+      description: 'Adds a generic product, redirects to define specifics. Access: ADM.'
+
+      tags:
+        - 'M02: Products'
+
+      parameters:
+        - in: query
+          name: name
+          description: Product name
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: price
+          description: Float with the product price
+          schema:
+            type: number
+          required: true
+        - in: query
+          name: brand
+          description: Product brand
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: image
+          description: Product image
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: size
+          description: Product size
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: stock
+          description: Starting stock
+          schema:
+            type: integer
+          required: true
+        - in: query
+          name: type
+          description: Product type
+          schema:
+            type: string
+          required: true
+
+      responses:
+        '302':
+          description: 'Redirect after setting basic prod features'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful authentication. Redirect to prod.'
+                  value: '/addprod/{type}'
+                302Failure:
+                  description: 'Failed authentication. Redirect addprod.'
+                  value: '/addprod'
+
+ /addprod/cpu:
+   get:
+     operationId: R213
+     summary: 'R212: Add CPU Form'
+     description: 'Provide CPU creation form. Access: ADM'
+     tags:
+        - 'M02: Products'
+     responses:
+       '200':
+         description: 'Ok. Show Form'
+       '403':
+         description: 'Access forbidden'
+   post:
+      operationId: R213
+      summary: 'R213: Add CPU'
+      description: 'Sets CPU features after setting initally prod features. Access: ADM.'
+
+      tags:
+        - 'M02: Products'
+
+      parameters:
+        - in: query
+          name: basefreq
+          description: Float with the basefreq
+          schema:
+            type: number
+          required: true
+        - in: query
+          name: turbofreq
+          description: Float with the turbofreq
+          schema:
+            type: number
+          required: true
+        - in: query
+          name: socket
+          description: String for socket
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: threads
+          description: Integer corresponding to threads
+          schema:
+            type: integer
+          required: true
+        - in: query
+          name: cores
+          description: Integer corresponding to cores
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '200':
+          description: Success
+
+ /addprod/gpu:
+   get:
+     operationId: R214
+     summary: 'R214: Add GPU Form'
+     description: 'Provide GPU creation form. Access: ADM'
+     tags:
+        - 'M02: Products'
+     responses:
+       '200':
+         description: 'Ok. Show Form'
+       '403':
+         description: 'Access forbidden'
+   post:
+      operationId: R214
+      summary: 'R214: Add GPU Product'
+      description: 'Sets GPU features after setting initally prod features. Access: ADM.'
+
+      tags:
+        - 'M02: Products'
+
+      parameters:
+        - in: query
+          name: memory
+          description: Int with memory
+          schema:
+            type: integer
+          required: true
+        - in: query
+          name: coreclock
+          description: Int with the coreclock
+          schema:
+            type: integer
+          required: true
+        - in: query
+          name: boostclock
+          description: Int for boostclock
+          schema:
+            type: integer
+          required: true
+        - in: query
+          name: boostclock
+          description: Integer corresponding to boostclock
+          schema:
+            type: integer
+          required: true
+        - in: query
+          name: hdmiports
+          description: Integer corresponding to hdmi ports
+          schema:
+            type: integer
+          required: true
+        - in: query
+          name: dispports
+          description: Integer corresponding to display ports
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '200':
+          description: Success
+
+ /addprod/motherboard:
+   get:
+     operationId: R215
+     summary: 'R215: Add Motherboard Form'
+     description: 'Provide motherboard creation form. Access: ADM'
+     tags:
+        - 'M02: Products'
+     responses:
+       '200':
+         description: 'Ok. Show Form'
+       '403':
+         description: 'Access forbidden'
+   post:
+      operationId: R215
+      summary: 'R215: Add Motherboard Product'
+      description: 'Sets Motherboard features after setting initally prod features. Access: ADM.'
+
+      tags:
+        - 'M02: Products'
+
+      parameters:
+        - in: query
+          name: socket
+          description: String for socket
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: type
+          description: String for motherboardtype
+          schema:
+            type: string
+          required: true
+
+      responses:
+        '200':
+          description: Success
+
+ /addprod/storage:
+   get:
+     operationId: R216
+     summary: 'R216: Add Storage Form'
+     description: 'Provide storage creation form. Access: ADM'
+     tags:
+        - 'M02: Products'
+     responses:
+       '200':
+         description: 'Ok. Show Form'
+       '403':
+         description: 'Access forbidden'
+   post:
+      operationId: R216
+      summary: 'R216: Adds Storage Features after Base Prod Specification'
+      description: 'Sets Storage features after setting initally prod features. Access: ADM.'
+
+      tags:
+        - 'M02: Products'
+
+      parameters:
+        - in: query
+          name: capacity
+          description: Int for storage capacity
+          schema:
+            type: integer
+          required: true
+        - in: query
+          name: type
+          description: String for storagetype
+          schema:
+            type: string
+          required: true
+
+      responses:
+        '200':
+          description: Success
+
+ /addprod/case:
+     get:
+     operationId: R217
+     summary: 'R217: Add Case Form'
+     description: 'Provide case creation form. Access: ADM'
+     tags:
+        - 'M02: Products'
+     responses:
+       '200':
+         description: 'Ok. Show Form'
+       '403':
+         description: 'Access forbidden'
+     post:
+      operationId: R217
+      summary: 'R217: Add Case Product'
+      description: 'Sets Case features after setting initally prod features. Access: ADM.'
+
+      tags:
+        - 'M02: Products'
+
+      parameters:
+        - in: query
+          name: color
+          description: String for color
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: weight
+          description: String for weight
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: type
+          description: String for case type
+          schema:
+            type: string
+          required: true
+
+      responses:
+        '200':
+          description: Success
+
+ /addprod/cooler:
+   get:
+     operationId: R218
+     summary: 'R218: Add Cooler Form'
+     description: 'Provide cooler creation form. Access: ADM'
+     tags:
+        - 'M02: Products'
+     responses:
+       '200':
+         description: 'Ok. Show Form'
+       '403':
+         description: 'Access forbidden'
+   post:
+      operationId: R218
+      summary: 'R218: Add Cooler Product'
+      description: 'Sets Cooler features after setting initally prod features. Access: ADM.'
+
+      tags:
+        - 'M02: Products'
+
+      parameters:
+        - in: query
+          name: type
+          description: String for cooler type
+          schema:
+            type: string
+          required: true
+
+      responses:
+        '200':
+          description: Success
+
+ /addprod/powersupply:
+   get:
+     operationId: R219
+     summary: 'R219: Add Supply Form'
+     description: 'Provide supply creation form. Access: ADM'
+     tags:
+        - 'M02: Products'
+     responses:
+       '200':
+         description: 'Ok. Show Form'
+       '403':
+         description: 'Access forbidden'
+   post:
+      operationId: R219
+      summary: 'R219: Add PowerSupply Product'
+      description: 'Sets CPU features after setting initally prod features. Access: ADM.'
+
+      tags:
+        - 'M02: Products'
+
+      parameters:
+        - in: query
+          name: wattage
+          description: Int for wattage
+          schema:
+            type: integer
+          required: true
+        - in: query
+          name: certification
+          description: String for certification
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: type
+          description: String for supply type
+          schema:
+            type: string
+          required: true
+
+      responses:
+        '200':
+          description: Success
+#addproduct end
+
+ /removeprod:
+     delete:
+       operationId: R220
+       summary: 'R220: Removes Given Product'
+       description: 'Removes product given by ID. Access: ADM.'
+
+       tags:
+         - 'M02: Products'
+
+       parameters:
+         - in: query
+           name: id
+           description: Int for id
+           schema:
+             type: number
+           required: true
+
+       responses:
+         '200':
+           description: Success
+
+
+
+ /addreview:
+    post:
+     operationId: R301
+     summary: 'R301: Add Review to product'
+     description: 'Adds review to specified product: Access: OWN'
+     tags:
+       - 'M03: Reviews and Wish list'
+
+     requestBody:
+       required: true
+       content:
+         application/x-www-form-urlencoded:
+           schema:
+             type: object
+             properties:
+               stars:
+                 type: int
+               text:
+                 type: string
+             required:
+                  - stars
+                  - text
+
+     responses:
+       '302':
+         description: 'Redirect after processing the review.'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'Successful authentication. Redirect to prod.'
+                 value: '/products/{id}'
+               302Failure:
+                 description: 'Failed authentication. Redirect to prod.'
+                 value: '/products/{id}'
+
+ /editreview:
+    post:
+     operationId: R302
+     summary: 'R302: Edit Product Review'
+     description: 'Edits review given to specified product: Access: OWN'
+     tags:
+       - 'M03: Reviews and Wish list'
+
+     requestBody:
+       required: true
+       content:
+         application/x-www-form-urlencoded:
+           schema:
+             type: object
+             properties:
+               stars:
+                 type: int
+               text:
+                 type: string
+             required:
+                  - stars
+                  - text
+
+     responses:
+       '302':
+         description: 'Redirect after processing the review.'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'Successful authentication. Redirect to prod.'
+                 value: '/products/{id}'
+               302Failure:
+                 description: 'Failed authentication. Redirect to prod.'
+                 value: '/products/{id}'
+
+ /removereview:
+    post:
+     operationId: R303
+     summary: 'R303: Remove Review from product'
+     description: 'Removes review from specified product: Access: OWN'
+     tags:
+       - 'M03: Reviews and Wish list'
+
+     responses:
+       '302':
+         description: 'Redirect after processing the review.'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'Successful authentication. Redirect to prod.'
+                 value: '/products/{id}'
+               302Failure:
+                 description: 'Failed authentication. Redirect to prod.'
+                 value: '/products/{id}'
+
+ /reviews/upvote/{id}:
+   post:
+     operationId: R314
+     summary: 'R134: Upvote review with {id}'
+     tags:
+       - 'M03: Reviews and Wish list'
+     responses:
+       '200':
+         description: 'Upvote'
+ /reviews/downvote/{id}:
+   post:
+     operationId: R315
+     summary: 'R135: Downvote review with {id}'
+     tags:
+       - 'M03: Reviews and Wish list'
+     responses:
+       '200':
+         description: 'Downvote'
+
+
+ /users/wishlist/{product_id}:
+    put:
+     operationId: R304
+     summary: 'R304: Add Product to Wishlist'
+     description: 'Adds Product to User Wishlist: Access: USR'
+     tags:
+       - 'M03: Reviews and Wish list'
+
+     responses:
+       '200':
+         description: Success
+
+    delete:
+     operationId: R305
+     summary: 'R305: Remove Product from Wishlist'
+     description: 'Removes Product from User Wishlist: Access: OWN'
+     tags:
+       - 'M03: Reviews and Wish list'
+
+     responses:
+       '200':
+         description: Success
+
+ /users/wishlist:
+    get:
+     operationId: R306
+     summary: 'R306: List products in wishlist'
+     description: 'Lists Products from User Wishlist: Access: OWN'
+     tags:
+       - 'M03: Reviews and Wish list'
+
+     responses:
+       '200':
+         description: Success
+         content:
+           application/json:
+             schema:
+               type: array
+               items:
+                 type: object
+                 properties:
+
+    delete:
+     operationId: R307
+     summary: 'R307: Empty Wishlist'
+     description: 'Empties the user wishlist. Access: OWN'
+     tags:
+      - 'M03: Reviews and Wish list'
+
+     responses:
+       '200':
+         description: Success
+
+ /users/cart:
+   get:
+     operationId: R400
+     summary: 'R400: Shows given users cart'
+     description: 'Show cart. Access: USR.'
+
+     tags:
+       - 'M04: Orders'
+
+     responses:
+       '200':
+         description: Success
+         content:
+           application/json:
+             schema:
+               type: array
+               items:
+                 type: object
+                 properties:
+
+   delete:
+     operationId: R401
+     summary: 'R401: Empty given users cart'
+     description: 'Empty cart. Access: USR.'
+
+     tags:
+      - 'M04: Orders'
+
+     responses:
+       '200':
+         description: Success
+
+ /users/cart/{product_id}:
+   put:
+     operationId: R402
+     summary: 'R402: Adds product by ID to cart'
+     description: 'Adds given product to cart. Access: PUB.'
+
+     tags:
+       - 'M04: Orders'
+
+     parameters:
+       - in: query
+         name: id
+         description: Product ID
+         schema:
+           type: number
+         required: true
+       - in: query
+         name: quantity
+         description: Product quantity
+         schema:
+           type: integer
+         required: true
+
+     responses:
+       '200':
+         description: Success
+
+   delete:
+     operationId: R403
+     summary: 'R403: Removes a product in cart'
+     description: 'Remove product in cart. Access: OWN.'
+
+     tags:
+       - 'M04: Orders'
+
+     parameters:
+       - in: query
+         name: id
+         description: Product ID
+         schema:
+           type: number
+         required: true
+
+     responses:
+       '200':
+         description: Success
+
+ /users/cart/{product_id}/increment:
+   post:
+     operationId: R404
+     summary: 'R404: Increment quantity of a product in cart'
+     description: 'Increment product in cart. Access: OWN.'
+
+     tags:
+       - 'M04: Orders'
+
+     parameters:
+       - in: query
+         name: id
+         description: Product ID
+         schema:
+           type: number
+         required: true
+       - in: query
+         name: quantity
+         description: Product quantity
+         schema:
+           type: integer
+         required: true
+
+     responses:
+       '200':
+         description: Success
+
+ /users/cart/{product_id}/decrement:
+   post:
+     operationId: R405
+     summary: 'R405: Decrement quantity of a product in cart'
+     description: 'Decrement product in cart. Access: OWN.'
+
+     tags:
+       - 'M04: Orders'
+
+     parameters:
+       - in: query
+         name: id
+         description: Product ID
+         schema:
+           type: number
+         required: true
+       - in: query
+         name: quantity
+         description: Product quantity
+         schema:
+           type: integer
+         required: true
+
+     responses:
+       '200':
+         description: Success
+
+ /users/cart/checkout:
+   post:
+     operationId: R406
+     summary: 'R406: Checkouts cart of Products'
+     description: 'Checkout cart of products. Access: OWN.'
+
+     tags:
+       - 'M04: Orders'
+
+     responses:
+       '200':
+         description: Success
+
+ /users/orders:
+   get:
+    operationId: R407
+    summary: 'R407: Show User Orders'
+    description: 'Order listing for users. Access: USR'
+    tags:
+      - 'M04: Orders'
+    responses:
+      '200':
+        description: 'Ok. Show'
+
+ /users/orders/cancel/{order_id}:
+   post:
+    operationId: R408
+    summary: 'R408: Cancel Order'
+    description: 'Order cancel for users. Access: USR'
+    tags:
+      - 'M04: Orders'
+    responses:
+      '200':
+        description: 'Ok. Cancel.'
+
+ /api/usersearch: #admins could see blocked users, how?
+   get:
+     operationId: R501
+     summary: 'R501: Search User accounts'
+     description: 'Lists all users. Access: PUB.'
+
+     tags:
+       - 'M05: User Administration and Information Pages'
+
+     parameters:
+       - in: query
+         name: name
+         description: User name
+         schema:
+           type: string
+         required: false
+       - in: query
+         name: email
+         description: User email
+         schema:
+           type: integer
+         required: false
+
+     responses:
+       '200':
+         description: Success
+         content:
+           application/json:
+             schema:
+               type: array
+               items:
+                 type: object
+                 properties:
+                  /blockusr:
+   post:
+     operationId: R502
+     summary: 'R502: Block User'
+     description: 'Blocks Specified User. Access: ADM'
+     tags:
+       - 'M05: User Administration and Information Pages'
+     responses:
+       '200':
+         description: 'Ok. Block'
+
+ /admin/users/block/{id}:
+   post:
+     operationId: R503
+     summary: 'R503: Block User'
+     description: 'Blocks Specified User. Access: ADM'
+     tags:
+       - 'M05: User Administration and Information Pages'
+     responses:
+       '200':
+         description: 'Ok. Block'
+
+ /admin/users/unblock/{id}:
+   post:
+     operationId: R508
+     summary: 'R508: Unblock User'
+     description: 'Unblocks Specified User. Access: ADM'
+     tags:
+       - 'M05: User Administration and Information Pages'
+     responses:
+       '200':
+         description: 'Ok. Unblock'
+
+ /viewhistory:
+   post:
+     operationId: R504
+     summary: 'R504: View User Purchase History'
+     description: 'Shows purchase history of specified user. Access: OWN, ADM'
+     tags:
+       - 'M05: User Administration and Information Pages'
+     responses:
+       '200':
+         description: 'Ok. Show'
+
+ /contacts:
+   get:
+     operationId: R505
+     summary: 'R505: View Contact Page'
+     description: 'View the Contact Page. Access: PUB'
+     tags:
+       - 'M05: User Administration and Information Pages'
+     responses:
+       '200':
+         description: 'Ok. Show'
+
+ /about:
+   get:
+     operationId: R506
+     summary: 'R506: View About Page'
+     description: 'View the About Page. Access: PUB'
+     tags:
+       - 'M05: User Administration and Information Pages'
+     responses:
+       '200':
+         description: 'Ok. Show'
+
+ /faq:
+   get:
+     operationId: R507
+     summary: 'R507: View Faq Page'
+     description: 'View the Faq Page. Access: PUB'
+     tags:
+       - 'M05: User Administration and Information Pages'
+     responses:
+       '200':
+         description: 'Ok. Show'
+
+ /admin/users:
+   get:
+    operationId: R510
+    summary: 'R10: Show All Users'
+    description: 'All User listing for admins. Access: ADM'
+    tags:
+      - 'M05: User Administration and Information Pages'
+    responses:
+      '200':
+        description: 'Ok. Show'
+      '403':
+        description: 'Access forbidden'
+
+ /admin/orders:
+   get:
+    operationId: R511
+    summary: 'R511: Show All Orders'
+    description: 'Order listing for admins. Access: ADM'
+    tags:
+      - 'M05: User Administration and Information Pages'
+    responses:
+      '200':
+        description: 'Ok. Show'
+      '403':
+        description: 'Access forbidden'
+
+ /admin/orders/edit/{order_id}:
+   post:
+    operationId: R512
+    summary: 'R512: Edit Order'
+    description: 'Order editing for admins. Access: ADM'
+    tags:
+      - 'M05: User Administration and Information Pages'
+    responses:
+      '200':
+        description: 'Ok. Edit'
+      '403':
+        description: 'Access forbidden'

@@ -1,0 +1,10 @@
+.add-button,
+#emptyWishlistButton{
+  height: 50px;
+  width: 200px;
+}
+
+#filterButton{
+  height: 50px;
+  width: 200px;
+}

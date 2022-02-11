@@ -1,0 +1,58 @@
+
+.aboutus-column {
+    float: left;
+    width: 25%;
+    margin-bottom: 16px;
+    margin-top: 30px;
+    padding: 0 8px;
+}
+  
+.aboutus-card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 8px;
+    text-align: center;
+    padding: 16px;
+}
+  
+.aboutus-section {
+    padding: 50px;
+    text-align: center;
+    background-color: #474e5d;
+    color: white;
+}
+  
+.aboutus-container {
+    padding: 0 16px;
+}
+  
+.aboutus-container::after, .row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+  
+.aboutus-title {
+    color: grey;
+}
+  
+.aboutus-button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+}
+  
+.aboutus-button:hover {
+    background-color: #555;
+}
+
+#DeveloperPhoto{
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+}
