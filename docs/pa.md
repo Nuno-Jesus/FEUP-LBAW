@@ -324,10 +324,6 @@ Filtering results is made easy, as users can filter out products by their stock,
 
 Users can add products to their carts and go through with a purchase, choosing a payment method and an address. Addresses are managed through the user profile. Users can also choose to keep the products in the cart or in a wishlist, since they recieve a notification when a product in any of those drops in price, or when a product that was once unavailable becomes avaliable again.
 
-URL to the product: http://lbaw2175.lbaw.fe.up.pt  
-
-URL to the slides used in the presentation: [Presentation](/docs/Presentation.pdf)
-
 
 ### 2. Video presentation
 
