@@ -6,7 +6,9 @@ The Conceptual Data Model represents all relations created on a database and exp
 
 ### 1. Class diagram
 
-![UML](uploads/d05023aa1ec39b40f0679cf6731d4302/UML.png)
+<div align=center>
+	<image src="../images/UML.png">
+</div>
 
 ### 2. Additional Business Rules
 
