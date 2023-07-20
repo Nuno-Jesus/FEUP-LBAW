@@ -1,19 +1,22 @@
 # FEUP-LBAW
 
-<figure align=center>
-	<image src="/docs/images/home.png" width=100%>
-	<figcaption><strong>Fig.1</strong> - Home page</figcaption>
-</figure>
+<image src="/docs/images/home.png" width=100%>
+<div align=center>
+	<strong>Fig.1</strong> - Home page
+</div>
+<br>
 
-<figure align=center>
-	<image src="/docs/images/products.png" width=100%>
-	<figcaption><strong>Fig.2</strong> - Products list page</figcaption>
-</figure>
+<image src="/docs/images/products.png" width=100%>
+<div align=center>
+	<strong>Fig.2</strong> - Products list page
+</div>
+<br>
 
-<figure align=center>
-	<image src="/docs/images/cart.png" width=100%>
-	<figcaption><strong>Fig.3</strong> - Cart page</figcaption>
-</figure>
+<image src="/docs/images/cart.png" width=100%>
+<div align=center>
+	<strong>Fig.3</strong> - Cart page
+</div>
+<br>
 
 
 ## Description
