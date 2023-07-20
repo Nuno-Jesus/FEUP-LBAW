@@ -31,7 +31,9 @@ The system should also support Help features such as placeholders for forms, con
 
 ### 1. Actors
 
-![Actors Diagram](uploads/756698dc5aaa220cc0ca83de1c9fa6d4/UML_Diagram.png)
+<div align=center>
+	<image src="../images/actors.png">
+</div>
 
 | Identifier | Description |
 | -------- | -------- |
@@ -189,7 +191,9 @@ A sitemap is a diagrammatic representation of a hierarchical system that provide
 - **User Pages:** the individual pages for users;
 - **Authentication:** the page that visitors get authenticated.
 
-![Sitemap](uploads/cac75ed7fd2bbdfdd04bb9a9cba92cc6/Sitemap.jpg)
+<div align=center>
+	<image src="../images/sitemap.jpg">
+</div>
 
 
 ### 2. Wireframes
@@ -198,7 +202,9 @@ A website wireframe is a visual representation of a website’s skeleton archite
 
 #### UI07: Item page
 
-![UI01](uploads/c259b6079edef4f45e58413bfa5d077f/Wireframe_1.png)
+<div align=center>
+	<image src="../images/wireframe_1.png">
+</div>
 
 1. Breadcrumbs help the user navigate the website, making them aware of their current location within the website; 
 2. The search feature is available throughout the whole website;
@@ -208,7 +214,9 @@ A website wireframe is a visual representation of a website’s skeleton archite
 
 #### UI05: User Profile
 
-![UI02](uploads/78ee1631b7d8ae7abc09007148b40bae/Wireframe_2.png)
+<div align=center>
+	<image src="../images/wireframe_2.png">
+</div>
 
 1. Breadcrumbs help the user navigate the website, making them aware of their current location within the website; 
 2. The search feature is available throughout the whole website;
