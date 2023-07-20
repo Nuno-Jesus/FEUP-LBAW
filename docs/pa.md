@@ -332,11 +332,8 @@ URL to the slides used in the presentation: [Presentation](/docs/Presentation.pd
 ### 2. Video presentation
 
 [Here's](https://drive.google.com/file/d/1UHsWo1DHUKdLptJDrUJAxX2QJ9_K4Cqc/view?usp=sharing "Videos folder") a video showcasing Grab N' Build:
-
 <div align=center>
-	<video width=100% height=100% controls>
-		<source src="videos/demo.mp4" type="video/mp4">
-	</video>
+	<video src="https://github.com/Nuno-Jesus/LBAW/assets/93390807/a88bb61e-42ad-4e04-b8a1-4740c5f2cdba" width=100%>
 </div>
 
 ---
