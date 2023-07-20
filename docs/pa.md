@@ -225,34 +225,34 @@ This parsing is made for other inputs as well, regardless of their types. After 
 
 ### 5. Accessibility and Usability
 
-Accessibility: [Link](docs/Acessibility.pdf)  
-Usability: [Link](docs/Usability.pdf)  
+- [Accessibility](pdf/acessibility.pdf)  
+- [Usability](pdf/usability.pdf)  
 
 ### 6. HTML & CSS Validation
 
 HTML:
-- [About Page](docs/HTML/about.pdf)  
-- [Cart Page](docs/HTML/cart.pdf)  
-- [Contacts Page](docs/HTML/contacts.pdf)  
-- [FAQ Page](docs/HTML/faq.pdf)  
-- [Home Page](docs/HTML/home.pdf)  
-- [Login Page](docs/HTML/login.pdf)  
-- [Products list Page](docs/HTML/product_list.pdf)  
-- [Product Page](docs/HTML/product.pdf)  
-- [Recover Password Page](docs/HTML/recover_password.pdf)  
-- [Register Page](docs/HTML/register.pdf)  
-- [User Profile Page](docs/HTML/user_profile.pdf)  
+- [About Page](pdf/html/about.pdf)  
+- [Cart Page](pdf/html/cart.pdf)  
+- [Contacts Page](pdf/html/contacts.pdf)  
+- [FAQ Page](pdf/html/faq.pdf)  
+- [Home Page](pdf/html/home.pdf)  
+- [Login Page](pdf/html/login.pdf)  
+- [Products list Page](pdf/html/product_list.pdf)  
+- [Product Page](pdf/html/product.pdf)  
+- [Recover Password Page](pdf/html/recover_password.pdf)  
+- [Register Page](pdf/html/register.pdf)  
+- [User Profile Page](pdf/html/user_profile.pdf)  
 
 CSS: 
-- [About File](docs/CSS/about.pdf)  
-- [App File](docs/CSS/app.pdf)  
-- [Buttons File](docs/CSS/buttons.pdf)  
-- [Cart File](docs/CSS/cart.pdf)  
-- [Contacts File](docs/CSS/contacts.pdf)  
-- [FAQ File](docs/CSS/faq.pdf)  
-- [Login/Register File](docs/CSS/login_register.pdf)  
-- [Not Found File](docs/CSS/not_found.pdf)  
-- [Product Form File](docs/CSS/product_form.pdf)  
+- [About File](pdf/css/about.pdf)  
+- [App File](pdf/css/app.pdf)  
+- [Buttons File](pdf/css/buttons.pdf)  
+- [Cart File](pdf/css/cart.pdf)  
+- [Contacts File](pdf/css/contacts.pdf)  
+- [FAQ File](pdf/css/faq.pdf)  
+- [Login/Register File](pdf/css/login_register.pdf)  
+- [Not Found File](pdf/css/not_found.pdf)  
+- [Product Form File](pdf/css/product_form.pdf)  
 
 ### 7. Revisions to the Project
 
