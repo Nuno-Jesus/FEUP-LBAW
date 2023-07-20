@@ -32,7 +32,7 @@ The system should also support Help features such as placeholders for forms, con
 ### 1. Actors
 
 <div align=center>
-	<image src="../images/actors.png">
+	<image src="images/actors.png">
 </div>
 
 | Identifier | Description |
@@ -192,7 +192,7 @@ A sitemap is a diagrammatic representation of a hierarchical system that provide
 - **Authentication:** the page that visitors get authenticated.
 
 <div align=center>
-	<image src="../images/sitemap.jpg">
+	<image src="images/sitemap.jpg">
 </div>
 
 
@@ -203,7 +203,7 @@ A website wireframe is a visual representation of a website’s skeleton archite
 #### UI07: Item page
 
 <div align=center>
-	<image src="../images/wireframe_1.png">
+	<image src="images/wireframe_1.png">
 </div>
 
 1. Breadcrumbs help the user navigate the website, making them aware of their current location within the website; 
@@ -215,7 +215,7 @@ A website wireframe is a visual representation of a website’s skeleton archite
 #### UI05: User Profile
 
 <div align=center>
-	<image src="../images/wireframe_2.png">
+	<image src="images/wireframe_2.png">
 </div>
 
 1. Breadcrumbs help the user navigate the website, making them aware of their current location within the website; 

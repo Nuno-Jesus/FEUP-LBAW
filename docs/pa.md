@@ -333,7 +333,12 @@ URL to the slides used in the presentation: [Presentation](/docs/Presentation.pd
 
 [Here's](https://drive.google.com/file/d/1UHsWo1DHUKdLptJDrUJAxX2QJ9_K4Cqc/view?usp=sharing "Videos folder") a video showcasing Grab N' Build:
 
-![video](uploads/c6b9b34ff3fba69c1d76d09e800e8e55/video.jpg)
+<div align=center>
+	<video width=100% height=100% controls>
+		<source src="videos/demo.mp4" type="video/mp4">
+	</video>
+</div>
+
 ---
 
 
