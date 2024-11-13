@@ -1,22 +1,11 @@
 # FEUP-LBAW
-
-<image src="/docs/images/home.png" width=100%>
 <div align=center>
-	<strong>Fig.1</strong> - Home page
+	<video src="https://github.com/Nuno-Jesus/LBAW/assets/93390807/a88bb61e-42ad-4e04-b8a1-4740c5f2cdba" width=100%>
 </div>
-<br>
 
-<image src="/docs/images/products.png" width=100%>
-<div align=center>
-	<strong>Fig.2</strong> - Products list page
-</div>
-<br>
-
-<image src="/docs/images/cart.png" width=100%>
-<div align=center>
-	<strong>Fig.3</strong> - Cart page
-</div>
-<br>
+|Home Page|Products List Page | Cart Page |
+|:-:|:-:|:-:|
+|<image src="/docs/images/home.png" width=100%>|<image src="/docs/images/products.png" width=100%>|<image src="/docs/images/cart.png" width=100%>
 
 
 ## Description
